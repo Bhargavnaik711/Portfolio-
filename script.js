@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* ==================== HEADER SHADOW ON SCROLL ==================== */
     const header = document.getElementById('header');
-    
+
     function scrollHeader() {
         if (window.scrollY >= 50) {
             header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.4)';
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ==================== SCROLL ENTRANCE REVEAL ANIMATIONS ==================== */
     // Add reveal class to all sections and cards dynamically for cleaner HTML
     const revealTargets = [];
-    
+
     // Select containers and cards to reveal
     const animatedSections = document.querySelectorAll('.section');
     animatedSections.forEach(sec => {
@@ -105,11 +105,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const typedTitleElement = document.querySelector('.hero-typed-title');
     if (typedTitleElement) {
         const titles = [
+            'AI & Intelligent Process Automation Student',
             'AI/ML Enthusiast',
-            'Data Science Student',
-            'ECE Engineer'
+            'Software Developer'
         ];
-        
+
         let titleIdx = 0;
         let charIdx = 0;
         let isDeleting = false;
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function typeEffect() {
             const currentTitle = titles[titleIdx];
-            
+
             if (isDeleting) {
                 typedTitleElement.textContent = currentTitle.substring(0, charIdx - 1);
                 charIdx--;
@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             setTimeout(typeEffect, typingSpeed);
         }
-        
+
         // Start after a slight delay
         setTimeout(typeEffect, 1000);
     }
@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const originalBtnText = submitBtn.innerHTML;
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
-            
+
             // Clear status
             formStatus.className = 'form-status';
             formStatus.textContent = '';
@@ -169,38 +169,38 @@ document.addEventListener('DOMContentLoaded', () => {
             const formData = new FormData(contactForm);
 
             // POST to Formspree endpoint
-            fetch('https://formspree.io/f/mrevkpdn', {
+            fetch('https://formspree.io/f/mlgklvkp', {
                 method: 'POST',
                 body: formData,
                 headers: {
                     'Accept': 'application/json'
                 }
             })
-            .then(response => {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalBtnText;
+                .then(response => {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalBtnText;
 
-                if (response.ok) {
-                    formStatus.classList.add('success');
-                    formStatus.textContent = `Thank you, ${name}! Your message has been sent successfully. I will get back to you soon.`;
-                    contactForm.reset();
-                } else {
-                    response.json().then(data => {
-                        formStatus.classList.add('error');
-                        if (Object.hasOwn(data, 'errors')) {
-                            formStatus.textContent = data.errors.map(error => error.message).join(", ");
-                        } else {
-                            formStatus.textContent = "Oops! There was a problem submitting your form. Please try again.";
-                        }
-                    });
-                }
-            })
-            .catch(error => {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalBtnText;
-                formStatus.classList.add('error');
-                formStatus.textContent = "Oops! There was a connection issue. Please check your network and try again.";
-            });
+                    if (response.ok) {
+                        formStatus.classList.add('success');
+                        formStatus.textContent = `Thank you, ${name}! Your message has been sent successfully. I will get back to you soon.`;
+                        contactForm.reset();
+                    } else {
+                        response.json().then(data => {
+                            formStatus.classList.add('error');
+                            if (Object.hasOwn(data, 'errors')) {
+                                formStatus.textContent = data.errors.map(error => error.message).join(", ");
+                            } else {
+                                formStatus.textContent = "Oops! There was a problem submitting your form. Please try again.";
+                            }
+                        });
+                    }
+                })
+                .catch(error => {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalBtnText;
+                    formStatus.classList.add('error');
+                    formStatus.textContent = "Oops! There was a connection issue. Please check your network and try again.";
+                });
         });
     }
 });
